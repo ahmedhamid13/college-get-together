@@ -1,0 +1,34 @@
+$dark: rgba(42, 42, 42, 1);
+$yellowish: #E0E0B0;
+$yellowish-dark: rgb(175, 175, 115);
+$white: white;
+$light-blue: #e3f2fd;
+$dark-blue: #002535;
+
+.bg-darkblue {
+    background-color: $dark-blue;
+}
+
+.border-darkblue {
+    border: $dark-blue 1px solid;
+}
+
+.text-darkblue {
+    color: $dark-blue;
+}
+
+.bg-yellowish{
+    background-color: $yellowish !important;
+}
+
+.bg-yellowish-dark{
+    background-color: $yellowish-dark !important;
+}
+
+.border-dotted-white{
+    border: #fff dotted 2px !important;
+}
+
+.border-dotted-dark{
+    border: #212529 dotted 2px !important;
+}

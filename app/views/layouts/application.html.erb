@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : t('global.college_get_together', default: 'College Get Together') %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "About College Get Together" %>">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= yield :style_includes %>
+    <% if @dark_mode %>
+      <%= stylesheet_link_tag 'dark', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% else %>
+      <%= stylesheet_link_tag 'light', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <%= render 'shared/header' %>
+      <%= render 'shared/messages' %>
+    </header>
+    <main role="main" id="main" class="main">
+      <%= render 'shared/sidebar' %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </main>
+
+    <footer>
+      <%= render 'shared/footer' %>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <%= yield :javascript_includes %>
+  </body>
+</html>

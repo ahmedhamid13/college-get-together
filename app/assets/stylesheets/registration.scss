@@ -1,0 +1,15 @@
+$dark-blue: #002535;
+
+.cover-login {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2))
+    ,asset_url("images/login.png") !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.cover-signup {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2))
+    ,asset_url("images/signup.png") !important;
+    background-position: center !important;
+    background-size: cover !important;
+}

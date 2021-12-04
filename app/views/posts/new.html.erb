@@ -1,0 +1,14 @@
+<% content_for :title, 'New Post' %>
+<div class="jumbotron p-1">
+  <h1 class="hvr-grow">New Post</h1>
+</div>
+<div class="container mt-4 mb-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-11">
+      <%= render 'form', post: @post %>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <%= link_to 'Back', posts_path if can? :create, @post %>
+  </div>
+</div>

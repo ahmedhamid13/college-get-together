@@ -1,0 +1,84 @@
+$white: white;
+$dark: rgb(42, 42, 42);
+$dark-blue: #002535;
+
+.navbar {
+    margin-bottom: 0;
+    background: $dark;
+}
+
+body {
+    background: $dark;
+    color: $white;
+    font-family: 'Merriweather', sans-serif;
+}
+
+h1,
+h2 {
+    font-weight: bold;
+}
+
+p {
+    font-size: 16px;
+    color: $white;
+}
+
+// a:visited {
+//     color: $dark;
+// }
+
+.jumbotron {
+    background: $dark-blue;
+    color: $white;
+    text-align: center;
+    margin: 0;
+    margin-top: 5px;
+    border-radius: 0;
+
+    p {
+        color: $white;
+        font-size: 22px;
+    }
+}
+
+.jumbotron-footer {
+    background: $dark-blue;
+    color: $white;
+    text-align: center;
+    // margin: 0;
+    // margin-top: 5px;
+    // border-radius: 0;
+
+    p {
+        color: $white;
+        font-size: 18px;
+    }
+}
+
+.link {
+    color: $white;
+}
+
+.cover-get-together {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))
+    ,asset_url("images/get-together.jpg") !important;
+    background-position: center !important;
+    background-size: cover !important;
+        color: $white !important;
+    p {
+        color: $white !important;
+    }
+    min-height: 420px;
+}
+
+.get-together-land {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))
+    ,asset_url("images/get-together-cover.jpg") !important;
+    background-position: center !important;
+    background-size: cover !important;
+    color: $white !important;
+    p {
+        color: $white !important;
+    }
+    min-height: 420px;
+}

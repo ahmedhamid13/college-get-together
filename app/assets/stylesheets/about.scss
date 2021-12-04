@@ -1,0 +1,28 @@
+.title {
+    color: grey;
+}
+
+.button {
+    border: none;
+    outline: 0;
+    display: block;
+    padding: 8px;
+    color: white;
+    margin: auto;
+    padding: auto;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 80%;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
+}

@@ -1,0 +1,65 @@
+<nav class="navbar <% if @dark_mode %>navbar-dark<% else %>navbar-light<% end %> navbar-static-top navbar-expand-md">
+  <div class="container">
+    <%= link_to root_path, class: 'navbar-brand m-0' do %>
+      <%= image_tag("favicon.ico", class: 'img-fluid m-0 hvr-grow', size: '45x45') %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="nav navbar-nav mr-auto">
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        <% if !current_user || (current_user && !current_user.role_is?("admin")) || (current_user && current_user.role_is?("admin") && @act_as_normal) %>
+          <li class='nav-item mt-1'><%= link_to 'Posts', posts_path, class: 'nav-link' %></li>
+        <% end %>
+        <% if current_user && current_user.role_is?("admin") && !@act_as_normal %>
+          <li class='nav-item mt-1'><%= link_to 'Adminstration', "/admin", class: 'nav-link border border-warning rounded' %></li>
+        <% end %>
+        <% if current_user %>
+          <% if !current_user.role_is?("admin") || @act_as_normal %>
+          <% end %>
+          <li class='nav-item mt-1'>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link border-danger rounded btn-md' do %>
+              <%= fa_icon "sign-out-alt"%>
+              <span>Sign Out</span>
+            <%end%>
+          </li>
+        <% else %>
+          <li class='nav-item mt-1'>
+            <%= link_to new_user_registration_path, class: 'nav-link border-primary rounded btn-md' do %>
+              <%= fa_icon "user-plus"%>
+              <span>Sign Up</span>
+            <%end%>
+          </li>
+          <li class='nav-item mt-1'>
+            <%= link_to new_user_session_path, class: 'nav-link border-success rounded btn-md' do %>
+              <%= fa_icon "user"%>
+              <span>Login</span>
+            <%end%>
+          </li>
+        <% end %>
+        <li class='nav-item mt-2 pt-1 ml-2'>
+          <%= form_with url: "/set_theme", method: :post do |form| %>
+            <label class="switch">
+              <input type="checkbox" name="theme_mode" <% if @dark_mode %>checked<% end %> onchange="this.form.submit()">
+              <span class="slider round" <% if @dark_mode %>style='background-color: #002535;'<% end %>></span>
+            </label>
+            <span>Dark mode</span>
+          <% end %>
+        </li>
+        <% if current_user && current_user.role_is?("admin") %>
+          <li class='nav-item mt-2 pt-1 ml-2'>
+            <%= form_with url: "/act_as_normal", method: :post do |form| %>
+              <label class="switch">
+                <input type="checkbox" name="as_normal" <% if @act_as_normal %>checked<% end %> onchange="this.form.submit()">
+                <span class="slider round" <% if @act_as_normal %>style='background-color: #002535;'<% end %>></span>
+              </label>
+              <span>Act as normal user</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,53 @@
+@import "app.css";
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+@import 'font-awesome';
+@import "toggling_theme.scss";
+@import "scroll_bar.scss";
+@import "animate.scss";
+@import "custom_bootstrap.scss";
+@import 'sidebar';
+@import 'hover_min.scss';
+
+.main{
+    min-height: 650px !important;
+}
+
+.pagination {
+    margin: 8px;
+
+    .page {
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #007bff;
+        border-radius: 50% 50%;
+        font-size: 18px;
+    }
+    .next{
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    .last{
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    .prev{
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    .first{
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+}

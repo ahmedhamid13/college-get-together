@@ -1,0 +1,4 @@
+development:
+  dsn: https://bf19e25fea9549299219c8789cb2a33d@o981593.ingest.sentry.io/6093684
+production:
+  dsn: https://bf19e25fea9549299219c8789cb2a33d@o981593.ingest.sentry.io/6093684

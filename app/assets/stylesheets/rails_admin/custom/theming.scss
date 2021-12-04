@@ -1,0 +1,30 @@
+// body { background-color: $link-color; }
+
+.sidebar-nav{
+    // border-right: 2px solid $brand-primary;
+    background-color: $gray-lighter !important;
+    margin: 0 !important;
+    // color:azure !important;
+    // a {
+    //     color:azure !important;
+    // }
+}
+
+.navbar-fixed-top{
+    border-bottom: 2px solid $gray-base !important;
+    background-color: $brand-primary !important;
+    margin: 0 !important;
+    color:azure !important;
+    a {
+        color:azure !important;
+    }
+}
+
+.dropdown-header {
+    border-bottom: 1px solid white !important;
+    margin: 2px !important;
+    color:$gray-base !important;
+    // a {
+    //     color:azure !important;
+    // }  
+}

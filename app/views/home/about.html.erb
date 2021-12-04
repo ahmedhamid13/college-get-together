@@ -1,0 +1,44 @@
+<% content_for :title, "About Us" %>
+<% content_for :style_includes do %>
+  <%= stylesheet_link_tag 'about', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+<div class="jumbotron p-1">
+  <h1 class="hvr-grow">About Us</h1>
+  <p>Some text about who we are and what we do.</p>
+  <p>Resize the browser window to see that this page is responsive by the way.</p>
+</div>
+<div class="container">
+  <h2 style="text-align:center">Our Team</h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-5 col-sm-10 border rounded shadow p-3 m-4 <% if @dark_mode %>border-white<% else %>border-dark<% end %>">
+        <%= image_tag("avatar.png", class: 'img-fluid rounded', width: '100%', alt: 'User avatar') %>
+        <div class="">
+          <h2>Jane Doe</h2>
+          <p class="title">CEO & Founder</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>jane@example.com</p>
+          <p><button class="text-center button">Contact</button></p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-5 col-sm-10 border rounded shadow p-3 m-4 <% if @dark_mode %>border-white<% else %>border-dark<% end %>">
+        <%= image_tag("avatar.png", class: 'img-fluid rounded', width: '100%', alt: 'User avatar') %>
+        <div class="">
+          <h2>Mike Ross</h2>
+          <p class="title">Art Director</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>mike@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-5 col-sm-10 border rounded shadow p-3 m-4 <% if @dark_mode %>border-white<% else %>border-dark<% end %>">
+        <%= image_tag("avatar.png", class: 'img-fluid rounded', width: '100%', alt: 'User avatar') %>
+        <div class="">
+          <h2>John Doe</h2>
+          <p class="title">Designer</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>john@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+    </div>
+  </div>
+</div>

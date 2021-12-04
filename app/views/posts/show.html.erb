@@ -1,0 +1,38 @@
+<% content_for :title, 'Post' %>
+<div class="jumbotron p-1">
+  <h1 class="hvr-grow">Post</h1>
+</div>
+<div class="container mt-4 mb-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-11">
+      <p>
+        <strong>Title:</strong>
+        <%= @post.title %>
+      </p>
+      <p>
+        <strong>Body:</strong>
+        <%= @post.body %>
+      </p>
+      <p>
+        <strong>User:</strong>
+        <%= @post.user.email %>
+      </p>
+      <p>
+        <strong>Comments:</strong>
+        <%= @post.comments.size %>
+      </p>
+      <p>
+        <strong>Likes:</strong>
+        <%= @post.likes.is_likes.size %>
+      </p>
+      <p>
+        <strong>DisLikes:</strong>
+        <%= @post.likes.is_dislikes.size %>
+      </p>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <%= link_to 'Edit', edit_post_path(@post) if can? :update, @post %> |
+    <%= link_to 'Back', posts_path %>
+  </div>
+</div>
