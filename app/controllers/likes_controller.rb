@@ -5,7 +5,11 @@ class LikesController < ApplicationController
 
   # GET /likes or /likes.json
   def index
-    @likes = @user_param ? @user_param.likes.includes(:user, :post).desc.page(params[:page]) : Like.includes(:user, :post).desc.page(params[:page])
+    if can? :read, Like
+      @likes = @user_param ? @user_param.likes.includes(:user, :post).desc.page(params[:page]) : Like.includes(:user, :post).desc.page(params[:page])
+    else
+      head :forbidden
+    end
   end
 
   # GET /likes/1 or /likes/1.json

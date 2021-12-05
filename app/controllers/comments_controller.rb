@@ -5,7 +5,11 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
-    @comments = @user_param ? @user_param.comments.includes(:user, :post).desc.page(params[:page]) : Comment.includes(:user, :post).desc.page(params[:page])
+    if can? :read, Comment
+      @comments = @user_param ? @user_param.comments.includes(:user, :post).desc.page(params[:page]) : Comment.includes(:user, :post).desc.page(params[:page])
+    else
+      head :forbidden
+    end
   end
 
   # GET /comments/1 or /comments/1.json

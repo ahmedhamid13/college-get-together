@@ -5,7 +5,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = @user_param ? @user_param.posts.includes(:user, :comments, :likes).desc.page(params[:page]) : Post.includes(:user, :comments, :likes).desc.page(params[:page])
+    if can? :read, Post
+      @posts = @user_param ? @user_param.posts.includes(:user, :comments, :likes).desc.page(params[:page]) : Post.includes(:user, :comments, :likes).desc.page(params[:page])
+    else
+      head :forbidden
+    end
   end
 
   # GET /posts/1 or /posts/1.json

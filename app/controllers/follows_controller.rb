@@ -5,7 +5,11 @@ class FollowsController < ApplicationController
 
   # GET /follows or /follows.json
   def index
-    @follows = @user_param ? @user_param.follows.includes(:user, :followed).desc.page(params[:page]) : Follow.includes(:user, :followed).desc.page(params[:page])
+    if can? :read, Follow
+      @follows = @user_param ? @user_param.follows.includes(:user, :followed).desc.page(params[:page]) : Follow.includes(:user, :followed).desc.page(params[:page])
+    else
+      head :forbidden
+    end
   end
 
   # GET /follows/1 or /follows/1.json
@@ -37,10 +41,10 @@ class FollowsController < ApplicationController
     if can? :create, @follow
       respond_to do |format|
         if @follow.save
-          format.html { redirect_to @follow, notice: "Follow was successfully created." }
+          format.html { redirect_to users_path, notice: "Follow was successfully created." }
           format.json { render :show, status: :created, location: @follow }
         else
-          format.html { render :new, status: :unprocessable_entity }
+          format.html { redirect_to users_path, status: :unprocessable_entity, alert: "Follow Failed to created." }
           format.json { render json: @follow.errors, status: :unprocessable_entity }
         end
       end
@@ -71,7 +75,8 @@ class FollowsController < ApplicationController
     if can? :destroy, @follow
       @follow.destroy
       respond_to do |format|
-        format.html { redirect_to follows_url, notice: "Follow was successfully destroyed." }
+        # format.html { redirect_to follows_url, notice: "Follow was successfully destroyed." }
+        format.html { redirect_to users_path, notice: "Follow was successfully destroyed." }
         format.json { head :no_content }
       end
     else

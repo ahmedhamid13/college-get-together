@@ -1,0 +1,17 @@
+<%= form_with(model: follow) do |form| %>
+  <% if follow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(follow.errors.count, "error") %> prohibited this follow from being saved:</h2>
+      <ul>
+        <% follow.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.hidden_field :user_id, value: current_user&.id %>
+  <%= form.hidden_field :followed_id, value: user&.id %>
+  <div class="actions">
+    <%= form.submit "#{(follow&.id) ? 'UnFollow' : 'Follow'}", class: "btn #{(follow&.id) ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'}" %>
+  </div>
+<% end %>
