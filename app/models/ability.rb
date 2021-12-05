@@ -22,12 +22,17 @@ class Ability
     elsif user&.role_is?("premium")
       can :manage, [User, Post, Comment, Like, Follow], user: user
       can :read, :all
+      
+      cannot :manage, :dashboard         # allow access to dashboard
       cannot :access, :rails_admin
       # can :manage, []
     elsif user&.role_is?("normal")
-      can :manage, [User, Post, Comment, Like, Follow], user: user
+      can [:access, :create, :update, :export, :history], [User, Post, Comment, Like, Follow], user: user
       can :read, :all
+
+      cannot :manage, :dashboard         # allow access to dashboard
       cannot :access, :rails_admin
+      cannot :destroy, [User, Post, Comment, Like, Follow]
       # can :manage, []
     else
       can :read, :all
