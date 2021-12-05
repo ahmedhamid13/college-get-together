@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  visitable :ahoy_visit
+
   belongs_to :user
   validates_presence_of :user, :title
   validates :title, length: { minimum: 1, maximum: 100 }

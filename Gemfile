@@ -70,6 +70,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "sentry-ruby"
 gem "sentry-rails"
+gem 'friendly_id'
 
 gem 'font-awesome-rails'
 gem 'colorize'
@@ -92,5 +93,4 @@ gem 'rails-i18n'
 gem 'ahoy_matey', '~> 4.0'
 gem 'browser'
 gem 'device_detector'
-gem 'geocoder'
 gem 'ipaddress'

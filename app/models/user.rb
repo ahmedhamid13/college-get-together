@@ -9,17 +9,21 @@ class User < ApplicationRecord
   has_many :followers, class_name: "Follow", foreign_key: "followed_id"
 
   visitable :ahoy_visit
+  extend FriendlyId
+  friendly_id :email, use: :slugged
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  validates :user_role, presence: true, on: :create
-  validates :email, :password, presence: true, on: :create
+  validates :email, :password, :user_role, presence: true, on: :create
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }, uniqueness: true, length: { maximum: 250 }, if: -> { email.present? }
+  validates :name, length: { minimum: 1, maximum: 250 }, if: -> { name.present? }
 
   enum user_role: [:normal, :premium, :admin], _default: "normal"
   validates :user_role, inclusion: { in: %w{normal premium admin} }
+
+  attr_accessor :premium
 
   validate :only_one_super_admin
 
@@ -32,6 +36,12 @@ class User < ApplicationRecord
 
   before_destroy do
     raise "Destroy aborted; you can't do that!" if self.is_super_admin
+  end
+
+  before_save :set_premium_role, if: Proc.new { self.premium }
+
+  def set_premium_role
+    self.user_role = :premium
   end
 
   before_save :set_default_name, if: Proc.new { self.name.blank? }

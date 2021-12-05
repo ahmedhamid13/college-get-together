@@ -7,5 +7,8 @@ class CreateLikes < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_column :likes, :ahoy_visit_id, :bigint
+    add_index :likes, :ahoy_visit_id
   end
 end

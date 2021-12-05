@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Like < ApplicationRecord
+  visitable :ahoy_visit
+
   belongs_to :user
   belongs_to :post
   validates_presence_of :user, :post

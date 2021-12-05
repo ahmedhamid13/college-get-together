@@ -1,31 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Comments</h1>
-
-<table class="table table-hover  table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
-  <thead class="thead-dark">
-    <tr>
-      <th>Body</th>
-      <th>User</th>
-      <th>Post</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.body %></td>
-        <td><%= comment.user_id %></td>
-        <td><%= comment.post_id %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Comment', new_comment_path %>
+<% content_for :title, 'Comments' %>
+<div class="jumbotron p-1">
+  <h1 class="hvr-grow">Comments</h1>
+  <% if current_user&.id %>
+    <h6>
+      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit"><%=@user_param ? 'All' : 'My Comments' %></button></form>
+    </h6>
+  <% end %>
+</div>
+<div class="container mt-4 mb-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-12">
+      <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
+        <thead class="thead-dark">
+          <tr>
+            <th>Body</th>
+            <th>User</th>
+            <th>Post</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td><%= comment.body %></td>
+              <td>By: <%= comment.user.email %></td>
+              <td><%= link_to post_path(comment.post), class: 'hvr-bob' do %><%= comment.post.title %><% end %></td>
+              <td><%= link_to 'Show', comment %></td>
+              <td><%= link_to 'Edit', edit_comment_path(comment) if can? :update, comment %></td>
+              <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, comment %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <%= paginate @comments, window: 2 if @comments.any? %>
+  </div>
+</div>

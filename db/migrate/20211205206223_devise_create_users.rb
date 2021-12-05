@@ -45,6 +45,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
     
     add_column :users, :ahoy_visit_id, :bigint
     add_index :users, :ahoy_visit_id
+    add_column :users, :slug, :string
+    add_index :users, :slug, unique: true
     add_index :users, :name
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true

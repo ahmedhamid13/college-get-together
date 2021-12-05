@@ -2,8 +2,8 @@
 
 Rails.application.routes.draw do
   resources :follows
-  resources :likes
-  resources :comments
+  resources :likes, except: %i[new]
+  resources :comments, except: %i[new]
   resources :posts
   # mount ActionCable.server => '/cable'
   # post '/graphiql/graphql', to: 'graphql#execute'  

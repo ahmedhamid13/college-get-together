@@ -2,7 +2,6 @@
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
       <ul>
         <% comment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,18 +9,16 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>
   </div>
-
-
-  <div class="field">
-    <%= form.label :post_id %>
-    <%= form.text_field :post_id %>
-  </div>
-
+  <% if comment&.id %>
+    <div class="field">
+      <strong>Post:</strong>
+      <%= link_to post_path(comment.post), class: 'hvr-bob' do %><%= comment.post.title %><% end %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

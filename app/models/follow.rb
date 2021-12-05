@@ -4,6 +4,8 @@ class Follow < ApplicationRecord
   belongs_to :user
   belongs_to :followed, class_name: "User"
   validates_presence_of :user, :followed
+  validates :user, uniqueness: { scope: :followed }
+
 
   rails_admin do
     object_label_method do

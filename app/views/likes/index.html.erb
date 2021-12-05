@@ -1,31 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Likes</h1>
-
-<table class="table table-hover  table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
-  <thead class="thead-dark">
-    <tr>
-      <th>Is like</th>
-      <th>User</th>
-      <th>Post</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @likes.each do |like| %>
-      <tr>
-        <td><%= like.is_like %></td>
-        <td><%= like.user_id %></td>
-        <td><%= like.post_id %></td>
-        <td><%= link_to 'Show', like %></td>
-        <td><%= link_to 'Edit', edit_like_path(like) %></td>
-        <td><%= link_to 'Destroy', like, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Like', new_like_path %>
+<% content_for :title, 'Likes' %>
+<div class="jumbotron p-1">
+  <h1 class="hvr-grow">Likes</h1>
+  <% if current_user&.id %>
+    <h6>
+      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit"><%=@user_param ? 'All' : 'My Likes' %></button></form>
+    </h6>
+  <% end %>
+</div>
+<div class="container mt-4 mb-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-12">
+      <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
+        <thead class="thead-dark">
+          <tr>
+            <th>Is Like</th>
+            <th>User</th>
+            <th>Post</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @likes.each do |like| %>
+            <tr>
+              <td><%= like.is_like %></td>
+              <td>By: <%= like.user.email %></td>
+              <td><%= link_to post_path(like.post), class: 'hvr-bob' do %><%= like.post.title %><% end %></td>
+              <td><%= link_to 'Show', like %></td>
+              <td><%= link_to 'Edit', edit_like_path(like) if can? :update, like %></td>
+              <td><%= link_to 'Destroy', like, method: :delete, data: { confirm: 'Are you sure?' } if can? :update, like %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <%= paginate @likes, window: 2 if @likes.any? %>
+  </div>
+</div>

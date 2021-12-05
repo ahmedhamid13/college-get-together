@@ -11,7 +11,7 @@ def create_user(mail, name, password, username, user_role)
 end
 
 def create_posts
-  18.times do |i|
+  12.times do |i|
     Post.create!(
       title: Faker::Name.name,
       body: Faker::Lorem.paragraph(sentence_count: 2),
@@ -21,7 +21,7 @@ def create_posts
 end
 
 def create_comments
-  50.times do |i|
+  30.times do |i|
     Comment.create!(
       body: Faker::Lorem.paragraph(sentence_count: 2),
       post: Post.all.sample,
@@ -31,13 +31,22 @@ def create_comments
 end
 
 def create_likes
-  50.times do |i|
+  30.times do |i|
     lk = Like.where(
       post: Post.all.sample,
       user: User.all.sample
     ).first_or_initialize
     lk.is_like = [true, false].sample
     lk.save!
+  end
+end
+
+def create_follows
+  30.times do |i|
+    Follow.where(
+      user: User.all.sample,
+      followed: User.all.sample
+    ).first_or_initialize.save!
   end
 end
 
@@ -50,3 +59,4 @@ end
 create_posts
 create_comments
 create_likes
+create_follows

@@ -7,5 +7,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    
+    add_column :posts, :ahoy_visit_id, :bigint
+    add_index :posts, :ahoy_visit_id
   end
 end

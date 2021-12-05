@@ -7,5 +7,8 @@ class CreateComments < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_column :comments, :ahoy_visit_id, :bigint
+    add_index :comments, :ahoy_visit_id
   end
 end

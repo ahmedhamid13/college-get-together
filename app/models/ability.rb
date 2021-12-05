@@ -9,11 +9,12 @@ class Ability
     if user&.is_super_admin
       # can :manage, [Ahoy, User, Post, Comment, Like, Follow]
       # can [:access, :read, :create, :update, :export, :history], [Category]
-      can :manage, :all
+      can :manage, [Ahoy, User, Post, Comment, Like, Follow]
       can :access, :rails_admin       # only allow admin users to access Rails Admin
       can :manage, :dashboard         # allow access to dashboard
     elsif user&.role_is?("admin")
-      can :manage, [Ahoy, User, Post, Comment, Like, Follow], user: user
+      can [:update, :destroy], [Ahoy, User, Post, Comment, Like, Follow], user: user
+      can [:access, :create, :export, :history], [Ahoy, User, Post, Comment, Like, Follow]
       # can [:access, :read, :create, :update, :export, :history], [Category]
       can :read, :all
       can :access, :rails_admin       # only allow admin users to access Rails Admin

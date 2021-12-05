@@ -6,23 +6,6 @@ class Ahoy::Visit < ApplicationRecord
   has_many :events, class_name: "Ahoy::Event"
   belongs_to :user, optional: true
 
-  before_save :set_location
-
-  UNVALIDATED_IP_ADDRESSES = ["::1", "localhost:3000", "localhost", "127.0.0.1"]
-
-  def set_location
-    if self.longitude && self.latitude
-      geo = Geocoder.search([self.longitude.to_f, self.latitude.to_f]).first
-    elsif self.ip.to_s && IPAddress.valid?(self.ip.to_s)
-      geo = Geocoder.search(self.ip.to_s).first
-      if geo&.coordinates&.any?
-        self.latitude = geo.coordinates[0].to_f
-        self.longitude = geo.coordinates[1].to_f
-      end
-    end
-    self.location = geo if geo
-  end
-
   before_save :set_device
   def set_device
     if self.user_agent

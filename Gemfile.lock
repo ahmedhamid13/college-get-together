@@ -136,10 +136,11 @@ GEM
     ffi (1.15.4)
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     fuubar (2.5.1)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
-    geocoder (1.7.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     haml (5.2.2)
@@ -410,8 +411,8 @@ DEPENDENCIES
   devise_token_auth
   faker
   font-awesome-rails
+  friendly_id
   fuubar
-  geocoder
   hiredis
   httparty
   i18n
