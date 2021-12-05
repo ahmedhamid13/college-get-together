@@ -10,17 +10,17 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label :body %>
     <%= form.text_area :body, rows: 8 %>
+    <%= form.hidden_field :post_id, value: post.id %>
   </div>
-  <% if comment&.id %>
-    <div class="field">
-      <strong>Post:</strong>
-      <%= link_to post_path(comment.post), class: 'hvr-bob' do %><%= comment.post.title %><% end %>
+  <hr>
+  <% if current_user&.email %>
+    <div class="field border border-secondary shadow rounded mr-3 ml-3">
+      By: <%= current_user.email %>
     </div>
   <% end %>
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-<hr>

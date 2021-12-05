@@ -2,59 +2,86 @@
 <div class="jumbotron p-1">
   <h1 class="hvr-grow">Post</h1>
 </div>
-<div class="container mt-4 mb-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-6 m-1  border rounded shadow p-1 pt-3">
-      <h2 class="mb-4">
-        <strong>Title:</strong>
-        <%= @post.title %>
-      </h2>
-      <p>
-        <strong>Body:</strong>
-        <%= @post.body %>
-      </p>
-      <p>
-        <strong>User:</strong>
-        By: <%= @post.user.email %>
-      </p>
-      <p>
-        <strong>Comments:</strong>
-        <%= @post.comments.size %>
-      </p>
-      <p>
-        <strong>Likes:</strong>
-        <%= @post.likes.is_likes.size %>
-      </p>
-      <p>
-        <strong>DisLikes:</strong>
-        <%= @post.likes.is_dislikes.size %>
-      </p>
-    </div>
-    <div class="col-5 m-1 border rounded shadow p-1 pt-3">
-      <h3 class="mb-3">Comments:</h3>
-      <div>
-        <table class="table table-sm table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
-          <thead class="thead-dark">
-            <tr>
-              <th>Body</th>
-              <th>User</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @post.comments.each do |comment| %>
-              <tr>
-                <td><%= comment.body %></td>
-                <td>By: <%= comment.user.email %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+<% if can? :read, @post %>
+  <div class="container mt-4 mb-5">
+    <div class="row justify-content-center text-center">
+      <div class="col-12 m-1  border rounded shadow p-1 pt-3">
+        <h2 class="mb-4 hvr-glow">
+          <strong>Title:</strong>
+          <%= @post.title %>
+        </h2>
+        <p class="border border-dark rounded mr-4 ml-4 p-2">
+          <%= @post.body %>
+        </p>
+        <p>
+          <strong>User:</strong>
+          By: <%= @post.user.email %>
+        </p>
+        <p>
+          <strong>Created At:</strong>
+          <%= @post.created_at.strftime("%m/%d/%Y At %I:%M:%S %p")%>
+        </p>
       </div>
     </div>
+    <div class="row justify-content-center text-center">
+      <div class="col-8 m-1 border rounded shadow p-1 pt-3">
+        <div>
+          <p>
+            <strong>Likes: </strong>
+            <%= @post.likes.is_likes.size %> |
+            <strong>DisLikes: </strong>
+            <%= @post.likes.is_dislikes.size %>
+          </p>
+        </div>
+        <hr />
+        <div>
+          <h3 class="mb-3">Comments (<%= @post.comments.size %>):</h3>
+          <div class="justify-content-center text-center p-1">
+            <table class="table table-sm table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Body</th>
+                  <th>Date</th>
+                  <th>User</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @comments.desc.each do |comment| %>
+                  <tr>
+                    <td><%= comment.body %></td>
+                    <td><%= comment.created_at.strftime("%m/%d/%Y At %I:%M:%S %p") %></td>
+                    <td>By: <%= comment.user.email %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="justify-content-center text-center m-auto">
+          <%= paginate @comments, window: 2 if @comments.any? %>
+        </div>
+      </div>
+      <% if (can? :create, Comment) || (can? :create, Like) %>
+        <div class="col-3 m-1 border rounded shadow p-1 pt-3">
+          <% if can? :create, Like %>
+            <div>
+              <%= render 'like_form', like: @like || Like.new, post: @post %>
+            </div>
+          <% end %>
+          <% if can? :create, Comment %>
+            <hr>
+            <h3 class="mb-4">Comment On Post</h3>
+            <div>
+              <%= render 'comment_form', comment: @comment || Comment.new, post: @post %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <hr>
+    <div class="row justify-content-center text-center p-1">
+      <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success" if can? :update, @post %> |
+      <%= link_to 'Back', posts_path, class: "btn btn-sm btn-secondary" %>
+    </div>
   </div>
-  <hr>
-  <div class="row justify-content-center text-center">
-    <%= link_to 'Edit', edit_post_path(@post) if can? :update, @post %> |
-    <%= link_to 'Back', posts_path %>
-  </div>
-</div>
+<% end %>

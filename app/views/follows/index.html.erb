@@ -3,36 +3,38 @@
   <h1 class="hvr-grow">Follows</h1>
   <% if current_user&.id %>
     <h6>
-      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit"><%=@user_param ? 'All' : 'My Follows' %></button></form>
+      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit" class="btn btn-sm  btn-info"><%=@user_param ? 'All' : 'My Follows' %></button></form>
     </h6>
   <% end %>
 </div>
-<div class="container mt-4 mb-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-12">
-      <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
-        <thead class="thead-dark">
-          <tr>
-            <th>Followed</th>
-            <th>User</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @follows.each do |follow| %>
+<% if can? :read, @follows %>
+  <div class="container mt-4 mb-5">
+    <div class="row justify-content-center text-center">
+      <div class="col-12">
+        <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
+          <thead class="thead-dark">
             <tr>
-              <td><%= follow.followed.email %></td>
-              <td><%= follow.user.email %></td>
-              <td><%= link_to 'Show', follow %></td>
-              <td><%= link_to 'Edit', edit_follow_path(follow) if can? :update, follow %></td>
-              <td><%= link_to 'Destroy', follow, method: :delete, data: { confirm: 'Are you sure?' }  if can? :destroy, follow %></td>
+              <th>Followed</th>
+              <th>User</th>
+              <th colspan="3"></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @follows.each do |follow| %>
+              <tr>
+                <td><%= follow.followed.email %></td>
+                <td><%= follow.user.email %></td>
+                <td><%= link_to 'Show', follow, class: "btn btn-sm btn-warning" if can? :read, follow %></td>
+                <td><%= link_to 'Edit', edit_follow_path(follow), class: "btn btn-sm btn-success" if can? :update, follow %></td>
+                <td><%= link_to 'Destroy', follow, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' }  if can? :destroy, follow %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-center text-center">
+      <%= paginate @follows, window: 2 if @follows.any? %>
     </div>
   </div>
-  <div class="row justify-content-center text-center">
-    <%= paginate @follows, window: 2 if @follows.any? %>
-  </div>
-</div>
+<% end %>

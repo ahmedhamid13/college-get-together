@@ -5,7 +5,7 @@ class FollowsController < ApplicationController
 
   # GET /follows or /follows.json
   def index
-    @follows = @user_param ? @user_param.follows.includes(:user, :followed).order(:created_at).page(params[:page]) : Follow.includes(:user, :followed).order(:created_at).page(params[:page])
+    @follows = @user_param ? @user_param.follows.includes(:user, :followed).desc.page(params[:page]) : Follow.includes(:user, :followed).desc.page(params[:page])
   end
 
   # GET /follows/1 or /follows/1.json

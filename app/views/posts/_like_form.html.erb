@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-center text-center">
+    <% if like.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(like.errors.count, "error") %> prohibited this like from being saved:</h2>
+        <ul>
+          <% like.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="row justify-content-center text-center">
+    <div class="col-5">
+      <%= form_with(model: like) do |form| %>
+        <div class="field">
+          <%= form.hidden_field :is_like, value: true %>
+          <%= form.hidden_field :post_id, value: post.id %>
+        </div>
+        <div class="actions">
+          <%= form.submit "Like", class: "btn #{(like&.id && like.is_like) ? 'btn-success' : 'btn-outline-success'}" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-5">
+      <%= form_with(model: like) do |form| %>
+        <div class="field">
+          <%= form.hidden_field :is_like, value: false %>
+          <%= form.hidden_field :post_id, value: post.id %>
+        </div>
+        <div class="actions">
+          <%= form.submit "DisLike", class: "btn #{(like&.id && !like.is_like) ? 'btn-danger' : 'btn-outline-danger'}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

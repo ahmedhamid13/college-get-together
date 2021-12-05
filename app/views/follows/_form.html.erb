@@ -2,7 +2,6 @@
   <% if follow.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(follow.errors.count, "error") %> prohibited this follow from being saved:</h2>
-
       <ul>
         <% follow.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,14 +9,12 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :followed_id %>
     <%= form.text_field :followed_id %>
   </div>
-
-
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+<hr>

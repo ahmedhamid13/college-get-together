@@ -5,11 +5,15 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = @user_param ? @user_param.posts.includes(:user, :comments, :likes).order(:created_at).page(params[:page]) : Post.includes(:user, :comments, :likes).order(:created_at).page(params[:page])
+    @posts = @user_param ? @user_param.posts.includes(:user, :comments, :likes).desc.page(params[:page]) : Post.includes(:user, :comments, :likes).desc.page(params[:page])
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    if @post
+      @comments = @post.comments.includes(:user, :post).desc.page(params[:page])
+      @like = current_user.likes.find_by(post_id: @post.id) if current_user
+    end
   end
 
   # GET /posts/new

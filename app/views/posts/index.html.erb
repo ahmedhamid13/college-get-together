@@ -3,48 +3,50 @@
   <h1 class="hvr-grow">Posts</h1>
   <% if current_user&.id %>
     <h6>
-      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit"><%=@user_param ? 'All' : 'My Posts' %></button></form>
+      <form><input type="hidden" name="user_filter" value="<%= @user_param ? nil : current_user.id %>"><button type="submit" class="btn btn-sm btn-info"><%=@user_param ? 'All' : 'My Posts' %></button></form>
     </h6>
   <% end %>
 </div>
-<div class="container mt-4 mb-5">
-  <div class="row justify-content-center text-center">
-    <%= link_to 'New Post', new_post_path if can? :create, Post %>
-  </div>
-  <hr />
-  <div class="row justify-content-center text-center">
-    <div class="col-12">
-      <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
-        <thead class="thead-dark">
-          <tr>
-            <th>Title</th>
-            <th>Body</th>
-            <th>User</th>
-            <th>Comments</th>
-            <th>Likes</th>
-            <th>DisLikes</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
+<% if can? :read, @posts %>
+  <div class="container mt-4 mb-5">
+    <div class="row justify-content-center text-center">
+      <%= link_to 'New Post', new_post_path, class: "btn btn-primary" if can? :create, Post %>
+    </div>
+    <hr />
+    <div class="row justify-content-center text-center">
+      <div class="col-12">
+        <table class="table table-hover table-striped  <%= @dark_mode ? 'table-dark ' :  '' %>">
+          <thead class="thead-dark">
             <tr>
-              <td><%= post.title %></td>
-              <td><%= post.body %></td>
-              <td>By: <%= post.user.email %></td>
-              <td><%= post.comments.size %></td>
-              <td><%= post.likes.is_likes.size %></td>
-              <td><%= post.likes.is_dislikes.size %></td>
-              <td><%= link_to 'Show', post if can? :read, post %></td>
-              <td><%= link_to 'Edit', edit_post_path(post) if can? :update, post %></td>
-              <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, post %></td>
+              <th>Title</th>
+              <th>Body</th>
+              <th>User</th>
+              <th>Comments</th>
+              <th>Likes</th>
+              <th>DisLikes</th>
+              <th colspan="3"></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= post.body %></td>
+                <td>By: <%= post.user.email %></td>
+                <td><%= post.comments.size %></td>
+                <td><%= post.likes.is_likes.size %></td>
+                <td><%= post.likes.is_dislikes.size %></td>
+                <td><%= link_to 'Show', post, class: "btn btn-sm btn-warning" if can? :read, post %></td>
+                <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-sm btn-success" if can? :update, post %></td>
+                <td><%= link_to 'Destroy', post, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, post %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-center text-center">
+      <%= paginate @posts, window: 2 if @posts.any? %>
     </div>
   </div>
-  <div class="row justify-content-center text-center">
-    <%= paginate @posts, window: 2 if @posts.any? %>
-  </div>
-</div>
+<% end %>

@@ -8,8 +8,8 @@ class Post < ApplicationRecord
   validates :title, length: { minimum: 1, maximum: 100 }
   validates :body, length: { minimum: 1, maximum: 3000 }
 
-  has_many :comments, class_name: "Comment", foreign_key: "post_id"
-  has_many :likes, class_name: "Like", foreign_key: "post_id"
+  has_many :comments, class_name: "Comment", foreign_key: "post_id", dependent: :destroy
+  has_many :likes, class_name: "Like", foreign_key: "post_id", dependent: :destroy
 
   rails_admin do
     object_label_method do

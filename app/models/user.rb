@@ -2,11 +2,11 @@
 
 class User < ApplicationRecord
   # default_scope { where(is_super_admin: false) }
-  has_many :posts, class_name: "Post", foreign_key: "user_id"
-  has_many :comments, class_name: "Comment", foreign_key: "user_id"
-  has_many :likes, class_name: "Like", foreign_key: "user_id"
-  has_many :follows, class_name: "Follow", foreign_key: "user_id"
-  has_many :followers, class_name: "Follow", foreign_key: "followed_id"
+  has_many :posts, class_name: "Post", foreign_key: "user_id", dependent: :destroy
+  has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
+  has_many :likes, class_name: "Like", foreign_key: "user_id", dependent: :destroy
+  has_many :follows, class_name: "Follow", foreign_key: "user_id", dependent: :destroy
+  has_many :followers, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   visitable :ahoy_visit
   extend FriendlyId

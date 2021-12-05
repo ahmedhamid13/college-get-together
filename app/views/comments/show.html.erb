@@ -2,43 +2,45 @@
 <div class="jumbotron p-1">
   <h1 class="hvr-grow">Comment</h1>
 </div>
-<div class="container mt-4 mb-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-6 m-1  border rounded shadow p-1 pt-3">
-      <h2 class="mb-4">
-        <strong>Body:</strong>
-        <%= @comment.body %>
-      </h2>
-      <p>
-        <strong>User:</strong>
-        By: <%= @comment.user.email %>
-      </p>
-      <p>
-        <strong>Post:</strong>
-        <%= link_to post_path(@comment.post), class: 'hvr-bob' do %><%= @comment.post.title %><% end %>
-      </p>
-    </div>
-    <div class="col-5 m-1 border rounded shadow p-1 pt-3">
-      <h3 class="mb-3">Post:</h3>
-      <div>
-        <h5 class="mb-4">
-          <strong>Title:</strong>
-          <%= @comment.post.title %>
-        </h5>
-        <p>
+<% if can? :read, @comment %>
+  <div class="container mt-4 mb-5">
+    <div class="row justify-content-center text-center">
+      <div class="col-6 m-1  border rounded shadow p-1 pt-3">
+        <h2 class="mb-4">
           <strong>Body:</strong>
-          <%= @comment.post.body %>
-        </p>
+          <%= @comment.body %>
+        </h2>
         <p>
           <strong>User:</strong>
-          By: <%= @comment.post.user.email %>
+          By: <%= @comment.user.email %>
+        </p>
+        <p>
+          <strong>Post:</strong>
+          <%= link_to post_path(@comment.post), class: 'hvr-bob' do %><%= @comment.post.title %><% end %>
         </p>
       </div>
+      <div class="col-5 m-1 border rounded shadow p-1 pt-3">
+        <h3 class="mb-3">Post:</h3>
+        <div>
+          <h5 class="mb-4">
+            <strong>Title:</strong>
+            <%= @comment.post.title %>
+          </h5>
+          <p>
+            <strong>Body:</strong>
+            <%= @comment.post.body %>
+          </p>
+          <p>
+            <strong>User:</strong>
+            By: <%= @comment.post.user.email %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center text-center">
+      <%= link_to 'Edit', edit_comment_path(@comment), class: "btn btn-sm btn-success" if can? :update, @comment  %> |
+      <%= link_to 'Back', comments_path, class: "btn btn-sm btn-secondary" %>
     </div>
   </div>
-  <hr>
-  <div class="row justify-content-center text-center">
-    <%= link_to 'Edit', edit_comment_path(@comment) if can? :update, @comment  %> |
-    <%= link_to 'Back', comments_path %>
-  </div>
-</div>
+<% end %>

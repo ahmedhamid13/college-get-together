@@ -12,6 +12,7 @@ class Ability
       can :manage, [Ahoy, User, Post, Comment, Like, Follow]
       can :access, :rails_admin       # only allow admin users to access Rails Admin
       can :manage, :dashboard         # allow access to dashboard
+      can :read, :all
     elsif user&.role_is?("admin")
       can [:update, :destroy], [Ahoy, User, Post, Comment, Like, Follow], user: user
       can [:access, :create, :export, :history], [Ahoy, User, Post, Comment, Like, Follow]
@@ -22,7 +23,7 @@ class Ability
     elsif user&.role_is?("premium")
       can :manage, [User, Post, Comment, Like, Follow], user: user
       can :read, :all
-      
+
       cannot :manage, :dashboard         # allow access to dashboard
       cannot :access, :rails_admin
       # can :manage, []

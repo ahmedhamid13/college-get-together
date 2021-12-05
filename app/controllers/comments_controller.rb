@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
-    @comments = @user_param ? @user_param.comments.includes(:user, :post).order(:created_at).page(params[:page]) : Comment.includes(:user, :post).order(:created_at).page(params[:page])
+    @comments = @user_param ? @user_param.comments.includes(:user, :post).desc.page(params[:page]) : Comment.includes(:user, :post).desc.page(params[:page])
   end
 
   # GET /comments/1 or /comments/1.json
@@ -35,12 +35,21 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if can? :create, @comment
+      @post = Post.find_by_id(@comment.post_id) if @comment&.post_id
       respond_to do |format|
         if @comment.save
-          format.html { redirect_to @comment, notice: "Comment was successfully created." }
+          if @post.present?
+            format.html { redirect_to @post, notice: "Comment was successfully created." }
+          else
+            format.html { redirect_to @comment, notice: "Comment was successfully created." }
+          end
           format.json { render :show, status: :created, location: @comment }
         else
-          format.html { render :new, status: :unprocessable_entity }
+          if @post.present?
+            format.html { redirect_to @post, alert: "Comment failed to create." }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+          end
           format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
       end
