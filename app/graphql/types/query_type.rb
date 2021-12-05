@@ -4,14 +4,18 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    ## GET ALL
+    field :fetch_users, resolver: Queries::All::FetchUsers, description: "Fetching All Users"
+    field :fetch_posts, resolver: Queries::All::FetchPosts, description: "Fetching All Posts"
+    field :fetch_comments, resolver: Queries::All::FetchComments, description: "Fetching All Comments"
+    field :fetch_likes, resolver: Queries::All::FetchLikes, description: "Fetching All Likes"
+    field :fetch_follows, resolver: Queries::All::FetchFollows, description: "Fetching All Follows"
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
+    ## GET ONE
+    field :fetch_user, resolver: Queries::One::FetchUser, description: "Fetching One User"
+    field :fetch_post, resolver: Queries::One::FetchPost, description: "Fetching One Post"
+    field :fetch_comment, resolver: Queries::One::FetchComment, description: "Fetching One Comment"
+    field :fetch_like, resolver: Queries::One::FetchLike, description: "Fetching One Like"
+    field :fetch_follow, resolver: Queries::One::FetchFollow, description: "Fetching One Follow"
   end
 end
