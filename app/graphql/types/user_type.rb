@@ -28,5 +28,30 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :ahoy_visit_id, ID, null: true
     field :slug, String, null: true
+    field :followers_count, Integer, null: false
+    field :follows_count, Integer, null: false
+    field :posts_count, Integer, null: false
+    field :comments_count, Integer, null: false
+    field :likes_count, Integer, null: false
+
+    def followers_count
+      object.followers.size
+    end
+
+    def follows_count
+      object.follows.size
+    end
+
+    def posts_count
+      object.posts.size
+    end
+
+    def comments_count
+      object.comments.size
+    end
+
+    def likes_count
+      object.likes.size
+    end
   end
 end
