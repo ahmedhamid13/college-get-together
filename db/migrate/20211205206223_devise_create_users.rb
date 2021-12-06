@@ -54,7 +54,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
     # add_index :users, :unlock_token,         unique: true
 
     User.create! do |u|
-      u.email = 'super_admin@gtera.com'
+      u.email = 'super_admin@college.com'
       u.password = 'admin123'
       u.is_super_admin = true
     end

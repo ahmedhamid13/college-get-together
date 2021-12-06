@@ -25,7 +25,7 @@ You should have `ruby`, `rails` and `postgres` installed. If you don't, install 
    $ rails s
    ```
 
-- > you can login with super admin user by (email: super_admin@gtera.com, password: admin123).
+- > you can login with super admin user by (email: super_admin@college.com, password: admin123).
 - > you can login with admin user by (email: ahmed_admin@mail.com, password: 123456), or create new admin from admin dashboard.
 - > you can login with premium user by (email: ahmed_premium@mail.com, password: 123456), or create new premium from registration.
 - > you can login with normal user by (email: ahmed_normal@mail.com, password: 123456), or create new normal from registration.
