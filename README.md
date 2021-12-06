@@ -126,7 +126,7 @@ mutation {
 
 # QR-Code To Deployment web
 
-<img src="https://github.com/ahmedhamid13/college-get-together/blob/master/qrcode.png" alt="college together qr code" width="200">
+<img src="https://github.com/ahmedhamid13/college-get-together/blob/main/qrcode.png" alt="college together qr code" width="200">
 
 ### License
 
