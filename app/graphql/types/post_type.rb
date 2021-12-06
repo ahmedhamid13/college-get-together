@@ -16,11 +16,11 @@ module Types
     field :likes_count, Integer, null: false
 
     def comments_count
-        object.comments.size
+      object.comments.size
     end
 
     def likes_count
-        object.likes.size
+      object.likes.size
     end
   end
 end
