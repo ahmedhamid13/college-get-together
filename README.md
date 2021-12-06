@@ -6,7 +6,7 @@ You should have `ruby`, `rails` and `postgres` installed. If you don't, install 
 
 1. Download the zipped file and unzip it or Clone it
    ```sh
-   $ git clone https://github.com/ahmedhamid13/Educatly-Airline.git
+   $ git clone https://github.com/ahmedhamid13/college-get-together
    ```
 2. Run this command to install the packages needed
    ```sh
