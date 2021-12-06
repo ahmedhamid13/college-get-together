@@ -24,7 +24,7 @@
             <% @likes.each do |like| %>
               <tr>
                 <td><%= like.is_like %></td>
-                <td>By: <%= like.user.email %></td>
+                <td>By: <%= link_to user_path(like.user), class: 'hvr-glow' do %><%= like.user.email %><% end %></td>
                 <td><%= link_to post_path(like.post), class: 'hvr-bob' do %><%= like.post.title %><% end %></td>
                 <td><%= link_to 'Show', like, class: "btn btn-sm btn-warning" if can? :read, like %></td>
                 <td><%= link_to 'Edit', edit_like_path(like), class: "btn btn-sm btn-success" if can? :update, like %></td>

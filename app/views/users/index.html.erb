@@ -13,6 +13,7 @@
               <th>Email</th>
               <th>Followers</th>
               <th>Follow</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -30,6 +31,7 @@
                     <% end %>
                   <% end %>
                 </td>
+                <td><%= link_to 'Show', user, class: "btn btn-sm btn-warning" if can? :read, user %></td>
               </tr>
             <% end %>
           </tbody>

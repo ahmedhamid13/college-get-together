@@ -12,7 +12,7 @@
         </h2>
         <p>
           <strong>User:</strong>
-          By: <%= @comment.user.email %>
+          <%= link_to user_path(@comment.user), class: 'hvr-glow' do %><%= @comment.user.email %><% end %>
         </p>
         <p>
           <strong>Post:</strong>
@@ -32,7 +32,7 @@
           </p>
           <p>
             <strong>User:</strong>
-            By: <%= @comment.post.user.email %>
+            By: <%= link_to user_path(@comment.post.user), class: 'hvr-glow' do %><%= @comment.post.user.email %><% end %>
           </p>
         </div>
       </div>

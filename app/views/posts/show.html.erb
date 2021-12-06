@@ -15,7 +15,7 @@
         </p>
         <p>
           <strong>User:</strong>
-          By: <%= @post.user.email %>
+          By: <%= link_to user_path(@post.user), class: 'hvr-glow' do %><%= @post.user.email %><% end %>
         </p>
         <p>
           <strong>Created At:</strong>

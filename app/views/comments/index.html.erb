@@ -24,7 +24,7 @@
             <% @comments.each do |comment| %>
               <tr>
                 <td><%= comment.body %></td>
-                <td>By: <%= comment.user.email %></td>
+                <td>By: <%= link_to user_path(comment.user), class: 'hvr-glow' do %><%= comment.user.email %><% end %></td>
                 <td><%= link_to post_path(comment.post), class: 'hvr-bob' do %><%= comment.post.title %><% end %></td>
                 <td><%= link_to 'Show', comment, class: "btn btn-sm btn-warning" if can? :read, comment %></td>
                 <td><%= link_to 'Edit', edit_comment_path(comment), class: "btn btn-sm btn-success" if can? :update, comment %></td>

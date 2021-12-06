@@ -42,7 +42,7 @@ class FollowsController < ApplicationController
     if can? :create, @follow
       respond_to do |format|
         if @follow.save
-          format.html { redirect_to users_path, notice: "Follow was successfully created." }
+          format.html { redirect_to @follow.user, notice: "Follow was successfully created." }
           format.json { render :show, status: :created, location: @follow }
         else
           format.html { redirect_to users_path, status: :unprocessable_entity, alert: "Follow Failed to created." }
@@ -59,7 +59,7 @@ class FollowsController < ApplicationController
     if can? :update, @follow
       respond_to do |format|
         if @follow.update(follow_params)
-          format.html { redirect_to @follow, notice: "Follow was successfully updated." }
+          format.html { redirect_to @follow.user, notice: "Follow was successfully updated." }
           format.json { render :show, status: :ok, location: @follow }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -76,8 +76,7 @@ class FollowsController < ApplicationController
     if can? :destroy, @follow
       @follow.destroy
       respond_to do |format|
-        # format.html { redirect_to follows_url, notice: "Follow was successfully destroyed." }
-        format.html { redirect_to users_path, notice: "Follow was successfully destroyed." }
+        format.html { redirect_to @follow.user, notice: "Follow was successfully destroyed." }
         format.json { head :no_content }
       end
     else

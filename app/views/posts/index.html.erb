@@ -19,8 +19,8 @@
           <thead class="thead-dark">
             <tr>
               <th>Title</th>
-              <th>Body</th>
               <th>User</th>
+              <th>Date</th>
               <th>Comments</th>
               <th>Likes</th>
               <th>DisLikes</th>
@@ -31,8 +31,8 @@
             <% @posts.each do |post| %>
               <tr>
                 <td><%= post.title %></td>
-                <td><%= post.body %></td>
-                <td>By: <%= post.user.email %></td>
+                <td>By: <%= link_to user_path(post.user), class: 'hvr-glow' do %><%= post.user.email %><% end %></td>
+                <td><%= post.created_at.strftime("%m/%d/%Y At %I:%M:%S %p") %></td>
                 <td><%= post.comments.size %></td>
                 <td><%= post.likes.is_likes.size %></td>
                 <td><%= post.likes.is_dislikes.size %></td>
