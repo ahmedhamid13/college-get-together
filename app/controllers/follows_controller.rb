@@ -2,6 +2,7 @@
 
 class FollowsController < ApplicationController
   before_action :set_follow, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /follows or /follows.json
   def index

@@ -5,4 +5,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   scope :desc, -> { order(created_at: :desc) }
   scope :asc, -> { order(created_at: :asc) }
+
+  def can_manage
+    false
+  end
 end

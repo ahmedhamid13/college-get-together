@@ -2,6 +2,7 @@
 
 class LikesController < ApplicationController
   before_action :set_like, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /likes or /likes.json
   def index
