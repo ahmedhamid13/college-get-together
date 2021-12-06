@@ -37,7 +37,7 @@ You should have `ruby`, `rails` and `postgres` installed. If you don't, install 
 - **GraphQL** => Query Language.
 - **Heroku** => PaaS.
 - **Sass** => Stylesheet - Structure.
-- **Ruby Gems** => Ruby's packages as: (devise, cancancan, ahoy, friendly_id, sentry, i18n and rails_admin).
+- **Ruby Gems** => Ruby's packages as: (devise, cancancan, ahoy, friendly_id, sentry, i18n, blazer, rails_performance and rails_admin).
 
 # GraphQL Examples
 
