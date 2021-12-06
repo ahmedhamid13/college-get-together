@@ -5,7 +5,7 @@ module Queries::All
     type [Types::CommentType], null: false
 
     def resolve
-      Comment.all.order(created_at: :desc)
+      Comment.all.desc
     end
   end
 end

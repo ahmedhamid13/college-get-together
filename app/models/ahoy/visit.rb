@@ -5,6 +5,7 @@ class Ahoy::Visit < ApplicationRecord
 
   has_many :events, class_name: "Ahoy::Event"
   belongs_to :user, optional: true
+  scope :desc, -> { order(created_at: :desc) }
 
   before_save :set_device
   def set_device

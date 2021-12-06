@@ -18,6 +18,11 @@ module Types
     field :user_role, Integer, null: false
     field :is_super_admin, Boolean, null: false
     field :active, Boolean, null: true
+    field :followers, [Types::UserType], null: true
+    field :follows, [Types::UserType], null: true
+    field :posts, [Types::PostType], null: true
+    field :comments, [Types::CommentType], null: true
+    field :likes, [Types::LikeType], null: true
     field :deleted_at, GraphQL::Types::ISO8601DateTime, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

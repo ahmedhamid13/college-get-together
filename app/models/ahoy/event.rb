@@ -7,4 +7,5 @@ class Ahoy::Event < ApplicationRecord
 
   belongs_to :visit
   belongs_to :user, optional: true
+  scope :desc, -> { order(created_at: :desc) }
 end

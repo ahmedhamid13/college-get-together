@@ -5,7 +5,7 @@ module Queries::All
     type [Types::PostType], null: false
 
     def resolve
-      Post.all.order(created_at: :desc)
+      Post.all.desc
     end
   end
 end

@@ -5,7 +5,7 @@ module Queries::All
     type [Types::LikeType], null: false
 
     def resolve
-      Like.all.order(created_at: :desc)
+      Like.all.desc
     end
   end
 end

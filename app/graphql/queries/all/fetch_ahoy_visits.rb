@@ -5,7 +5,7 @@ module Queries::All
     type [Types::AhoyVisitType], null: false
 
     def resolve
-      AhoyVisit.all.order(created_at: :desc)
+      AhoyVisit.all.desc
     end
   end
 end

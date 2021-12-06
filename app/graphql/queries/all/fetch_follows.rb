@@ -5,7 +5,7 @@ module Queries::All
     type [Types::FollowType], null: false
 
     def resolve
-      Follow.all.order(created_at: :desc)
+      Follow.all.desc
     end
   end
 end
