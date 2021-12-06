@@ -6,13 +6,11 @@ module Mutations::Destroy
     field :follow, Types::FollowType, null: false
 
     def resolve(id:)
-      begin
-        follow = Follow.find(id)
-        follow.destroy
-        { follow: follow }
-      rescue ActiveRecord::RecordNotFound => _e
-        GraphQL::ExecutionError.new("Follow does not exist.")
-      end
+      follow = Follow.find(id)
+      follow.destroy
+      { follow: follow }
+    rescue ActiveRecord::RecordNotFound => _e
+      GraphQL::ExecutionError.new("Follow does not exist.")
     end
   end
 end

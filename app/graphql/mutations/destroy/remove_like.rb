@@ -6,13 +6,11 @@ module Mutations::Destroy
     field :like, Types::LikeType, null: false
 
     def resolve(id:)
-      begin
-        like = Like.find(id)
-        like.destroy
-        { like: like }
-      rescue ActiveRecord::RecordNotFound => _e
-        GraphQL::ExecutionError.new("Like does not exist.")
-      end
+      like = Like.find(id)
+      like.destroy
+      { like: like }
+    rescue ActiveRecord::RecordNotFound => _e
+      GraphQL::ExecutionError.new("Like does not exist.")
     end
   end
 end

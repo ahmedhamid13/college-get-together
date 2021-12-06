@@ -6,13 +6,11 @@ module Mutations::Destroy
     field :comment, Types::CommentType, null: false
 
     def resolve(id:)
-      begin
-        comment = Comment.find(id)
-        comment.destroy
-        { comment: comment }
-      rescue ActiveRecord::RecordNotFound => _e
-        GraphQL::ExecutionError.new("Comment does not exist.")
-      end
+      comment = Comment.find(id)
+      comment.destroy
+      { comment: comment }
+    rescue ActiveRecord::RecordNotFound => _e
+      GraphQL::ExecutionError.new("Comment does not exist.")
     end
   end
 end

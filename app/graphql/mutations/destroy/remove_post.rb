@@ -6,13 +6,11 @@ module Mutations::Destroy
     field :post, Types::PostType, null: false
 
     def resolve(id:)
-      begin
-        post = Post.find(id)
-        post.destroy
-        { post: post }
-      rescue ActiveRecord::RecordNotFound => _e
-        GraphQL::ExecutionError.new("Post does not exist.")
-      end
+      post = Post.find(id)
+      post.destroy
+      { post: post }
+    rescue ActiveRecord::RecordNotFound => _e
+      GraphQL::ExecutionError.new("Post does not exist.")
     end
   end
 end

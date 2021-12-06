@@ -6,13 +6,11 @@ module Mutations::Destroy
     field :user, Types::UserType, null: false
 
     def resolve(id:)
-      begin
-        user = User.find(id)
-        user.destroy
-        { user: user }
-      rescue ActiveRecord::RecordNotFound => _e
-        GraphQL::ExecutionError.new("User does not exist.")
-      end
+      user = User.find(id)
+      user.destroy
+      { user: user }
+    rescue ActiveRecord::RecordNotFound => _e
+      GraphQL::ExecutionError.new("User does not exist.")
     end
   end
 end
