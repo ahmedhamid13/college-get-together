@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: college_get_together_production
-  username: college_get_together
-  password: <%= ENV['COLLEGE_GET_TOGETHER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
